@@ -10,7 +10,9 @@ int eliminate(Matrix *mat, Matrix *b){
 int i,j,k,p;
 double temp;
 
-	for(i = 0; i < mat->r-1; i++) {
+
+for(i = 0; i < mat->r-1; i++) {
+
 		double maxi=fabs(mat->data[i][i]);
 		int maxi_i=i;
 		for(p=i+1;p<=mat->r-1;p++)
@@ -27,9 +29,11 @@ double temp;
 			temp=b->data[i][0];
 			b->data[i][0]=b->data[maxi_i][0];
 			b->data[maxi_i][0]=temp;
-//zmienilem wartosci w macierzy b, a teraz trza zrobic to w a macierzy
-			for(p=0;p<=mat->r-1;p++)
-			{
+
+//zmienilem wartosci w macierzy b, a teraz trzeba zrobic to w a macierzy
+
+		for(p=0;p<=mat->r-1;p++) {
+
 			temp=mat->data[i][p];
 			mat->data[i][p]=mat->data[maxi_i][p];
 			mat->data[maxi_i][p]=temp;
