@@ -14,18 +14,29 @@ Matrix * readFromFile(char * fname) {
 
 				if (fin != NULL) {
 					fscanf(fin,"%d %d",&r,&c);
+						if(c == NULL || r == NULL) {
+							printf("Podaj poprawny rzad/kolumny\n");
+							return NULL;
+						}
+						if(sizeof(int) != sizeof(c) || sizeof(int) != sizeof(r)) {
+							printf("Podaj poprawny format rzedow i kolumn!\n");
+							return NULL;
+						} 
 					mat = createMatrix(r,c);
 					if (mat != NULL) {
 						for (ir = 0; ir < r; ir++) 
-							for (ic = 0; ic < c; ic++)
+							for (ic = 0; ic < c; ic++) {
 								fscanf(fin, "%lf",&(mat->data[ir][ic]));
+					}
+					
+
 					} else {
-								fprintf(stderr,"Wystąpił problem podczas tworzenia macierzy o rozmiarach %d x %d dla danych z pliku: %s\n", r, c, fname);
+								fprintf(stderr,"WystÄ…piĹ‚ problem podczas tworzenia macierzy o rozmiarach %d x %d dla danych z pliku: %s\n", r, c, fname);
 					}
 
 					fclose(fin);
 				} else {
-								fprintf(stderr,"Nie mogę otworzyć pliku o nazwie: %s\n", fname);
+								fprintf(stderr,"Nie mogÄ™ otworzyÄ‡ pliku o nazwie: %s\n", fname);
 				}
 
 				return mat;
@@ -66,4 +77,5 @@ void freeMatrix(Matrix * mat) {
 	free(mat->data);
 	free(mat);
 }
+
 

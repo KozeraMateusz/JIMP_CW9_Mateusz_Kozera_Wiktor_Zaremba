@@ -10,3 +10,4 @@
 int eliminate(Matrix *mat, Matrix *b);
 
 #endif
+

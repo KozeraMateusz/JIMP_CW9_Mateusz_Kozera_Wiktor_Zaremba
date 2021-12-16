@@ -17,3 +17,4 @@ Matrix * createMatrix(int r, int c);
 void freeMatrix(Matrix *mat);
 
 #endif
+
