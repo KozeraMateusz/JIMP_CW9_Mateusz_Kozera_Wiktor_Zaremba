@@ -8,36 +8,40 @@ int i,j,k,p;
 double temp;
 
 for(i = 0; i < mat->r-1; i++) {
-	double max=fabs(mat->data[i][i]);
-		int maxi=i;
+
+		double maxi=fabs(mat->data[i][i]);
+		int maxi_i=i;
 		for(p=i+1;p<=mat->r-1;p++)
 		{
-			if(fabs(mat->data[i][p])>max)
+			if(fabs(mat->data[p][i])>maxi)
 			{
-				max=fabs(mat->data[i][p]);
-				maxi=i;
+				maxi=fabs(mat->data[p][i]);
+				maxi_i=p;
 			}
 		}		
+//petla przeszla po kolumnie i przeszukala za najwieksza wartoscia, teraz trzeba zmienic
+		if(maxi_i!=i) {
+			temp=b->data[i][0];
+			b->data[i][0]=b->data[maxi_i][0];
+			b->data[maxi_i][0]=temp;
+//zmienilem wartosci w macierzy b, a teraz trzeba zrobic to w a macierzy
 
-		if(maxi!=i) {
-			temp=b->data[0][i];
-			b->data[0][i]=b->data[0][maxi];
-			b->data[0][maxi]=temp;
 		for(p=0;p<=mat->r-1;p++) {
-			temp=mat->data[p][i];
-			mat->data[p][i]=mat->data[p][maxi];
-			mat->data[p][maxi]=temp;
+			temp=mat->data[i][p];
+			mat->data[i][p]=mat->data[maxi_i][p];
+			mat->data[maxi_i][p]=temp;
 		}
 				
 		}
 		
 		for(k = i+1; k < mat->r; k++) {
-			temp = mat->data[i][k] / mat->data[i][i];
+			temp = mat->data[k][i] / mat->data[i][i];
 			if(mat->data[i][i] == 0) {
-				printf("Niedobra macierz!\n");
+				printf("Macierz osobliwa!\n");
 				return NULL;
 			}
 		}
+		
 	for(k = i+1; k < mat->r; k++) {
 		temp = mat->data[k][i] / mat->data[i][i];
 
